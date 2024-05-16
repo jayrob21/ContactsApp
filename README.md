@@ -5,9 +5,11 @@ Setup and Run Instructions:
 	2.a To run the solution using Visual Studio and etc make sure .net 8 SDK is installed on your machine.
 		This can be done by update in the Visual Studio Installer app for windows or you could download the sdk.
 	2.b If you simply want to run the application you can either install the SDK and the .net Runtime or just the Runtime
-3. If you want to run the application there are 2 provided scripts to help do that in the root folder.
-	3.a For windows click on the "windows run app.cmd" to launch the site.
-	3.b For mac os or linux run the "unix run app.sh".
+	2.c You will also need to make sure node.js is installed on your machine
+3. If you want to run the application there is a script to help do that in the root folder. Run this using the command line
+	3.a Before running is not using visual studio run the dotnet build command to make sure dependencies are fetch and there are no machine configuration 
+	issues that cause build errors like node not being installed and etc.
+	3.b For windows click on the "windows run app.cmd" to launch the site.
 4. If you ran the application by using visual studio it will launch a browser window with the url: https://localhost:7005/swagger/index.html.
 	4.a The https://localhost:7005/swagger/index.html url is the swagger url for the api. 
 		To go to the web app navigate to https://localhost:7005 in your browser and it will redirect to the url.
@@ -29,7 +31,6 @@ and data annotations to make sure fields were required and in a certain format. 
 There is a global error handler in the .net app program.cs which looks like:
 
 app.Use(async (context, next) =>
-{
     List<string> blackListedMethods = ["OPTIONS", "PATCH", "TRACE"];
     if (blackListedMethods.Contains(context.Request.Method))
     {
@@ -48,11 +49,12 @@ app.Use(async (context, next) =>
         await context.Response.WriteAsync(ex.Message);
 
     }
-});
 
 
 This can normally be done by adding middleware into the builder services but I like doing it there since it's multi-use and this is where you would generally add in headers for the pipeline.
 The front end will catch these errors which would only have a simple exception message and show them to the user in the form of a sweetalert.
+
+There is also error/info logging happening for the application using NLog, this is stored in a log file where the build assembly is located.
 
 
 Performance and Scalability:
