@@ -1,0 +1,36 @@
+<div>
+  <input type="button" class="btn btn-alt float-start" value="Add New Contact" (click)="add()" />
+ <br />
+ 
+
+</div>
+
+<ng-template #newContactModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New Contact</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-control">
+      <form [formGroup]="contactForm" (ngSubmit)="addNewContact()">
+        <div>
+          <label for="firstName" class="float-lg-start">First Name</label>
+          <input id="firstName" class="form-control" type="text" formControlName="firstName" />
+        </div>
+        <br />
+        <div>
+          <label for="lastName" class="float-lg-start">Last Name</label>
+          <input id="lastName" class="form-control" type="text" formControlName="lastName" />
+        </div>
+        <br />
+        <div>
+          <label for="email" class="float-lg-start">Email</label>
+          <input id="email" class="form-control" type="email" formControlName="email" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-alt" [disabled]="!contactForm.valid" (click)="addNewContact()">Add</button>
+    <button type="button" class="btn btn-alt"  (click)="modal.close('Dismiss')">Cancel</button>
+  </div>
+</ng-template>

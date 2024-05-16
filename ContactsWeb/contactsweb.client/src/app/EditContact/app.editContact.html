@@ -1,0 +1,29 @@
+<input type="button" class="btn btn-alt btn-margin-top" value="Edit" (click)="update()"/>
+
+<ng-template #updateContactModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Contact Info</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-control">
+      <form [formGroup]="updateContactForm" (ngSubmit)="updateContact()">
+        <div>
+          <label for="firstName" class="float-lg-start">First Name</label>
+          <input id="firstName" class="form-control" type="text" formControlName="firstName" value="{{item.firstName}}" />
+        </div>
+        <div>
+          <label for="lastName" class="float-lg-start">Last Name</label>
+          <input id="lastName" class="form-control" type="text" formControlName="lastName" value="{{item.lastName}}" />
+        </div>
+        <div>
+          <label for="email" class="float-lg-start">Email</label>
+          <input id="email" class="form-control" type="email" formControlName="email" value="{{item.email}}" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-alt" [disabled]="!updateContactForm.valid" (click)="updateContact()">Update Contact Info</button>
+    <button type="button" class="btn btn-alt" (click)="modal.close('Dismiss')">Cancel</button>
+  </div>
+</ng-template>

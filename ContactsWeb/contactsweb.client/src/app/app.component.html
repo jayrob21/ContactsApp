@@ -1,0 +1,12 @@
+<h4 class="float-start">Contact List</h4>
+
+<div>
+  <app-add-component (newContactEvent)="handleContacts($event)"></app-add-component>
+  <ag-grid-angular class="ag-theme-quartz ag-style-alt" [rowData]="getContactList()"
+                   [pagination]="true"
+                   [paginationPageSize]="paginationPageSize"
+                   [paginationPageSizeSelector]="paginationPageSizeSelector"
+                   [rowHeight]="50"
+                   [columnDefs]="columns"></ag-grid-angular>
+  <div class="clearfix"></div>
+</div>
